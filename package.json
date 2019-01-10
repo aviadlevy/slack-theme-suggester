@@ -1,0 +1,20 @@
+{
+  "name": "slack-theme-suggester",
+  "version": "1.0.0",
+  "description": "Slack slash command to suggest a name to scrum sprint (current theme - bands)",
+  "author": {
+    "email": "aviadlevy1@gmail.com",
+    "name": "Aviad Levy",
+    "url": "http://github.com/aviadlevy"
+  },
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "latest",
+    "express": "^4.16.4",
+    "request": "^2.88.0"
+  }
+}
