@@ -3,20 +3,20 @@ const axios = require("axios");
 const slackMessages = require("./slackMessages");
 
 module.exports = {
-    bandDict: {},
-    sendEndingMsg: function (response_url, bandName) {
-        this.sendMsgToSlack(response_url, slackMessages.getFinalMsg(bandName)
+    themeNameToImgDict: {},
+    sendEndingMsg: function (responseUrl, themeName) {
+        this.sendMsgToSlack(responseUrl, slackMessages.getFinalMsg(themeName)
         )
     },
-    sendSuggestionMsg: function (response_url, letter) {
-        parser.getBandsFromFile(letter, 'bands_enriched.csv')
+    sendSuggestionMsg: function (responseUrl, letter, filePath) {
+        parser.getThemeNamesToImgFromFile(letter, filePath)
             .then(choices => {
-                this.bandsDict = choices;
-                return this.sendMsgToSlack(response_url, slackMessages.getChoiceMsg(choices, 'bands', letter));
+                this.themeNameToImgDict = choices;
+                return this.sendMsgToSlack(responseUrl, slackMessages.getChoiceMsg(choices, parser.theme, letter));
             });
     },
-    sendMsgToSlack: function (response_url, msg) {
-        return axios.post(response_url, msg)
+    sendMsgToSlack: function (responseUrl, msg) {
+        return axios.post(responseUrl, msg)
             .then(function (response) {
                 // console.log(response);
             })
@@ -24,7 +24,7 @@ module.exports = {
                 console.log(error);
             })
     },
-    sendIsThisYourPick: function (response_url, bandName, letter) {
-        this.sendMsgToSlack(response_url, slackMessages.getIsThisYourPickMsg(this.bandsDict, bandName, letter));
+    sendIsThisYourPick: function (responseUrl, themeName, letter) {
+        this.sendMsgToSlack(responseUrl, slackMessages.getIsThisYourPickMsg(this.themeNameToImgDict, themeName, letter));
     }
 };
