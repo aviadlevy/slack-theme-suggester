@@ -4,14 +4,14 @@ const readline = require('readline');
 
 module.exports = {
     theme: '',
-    getThemeNamesToImgFromFile: function (letter, file) {
+    getThemeNamesToImgFromFile: (letter, file) => {
         let rl = readline.createInterface({
             input: fs.createReadStream(file)
         });
         let isFirst = true;
         let themesNameToImg = {};
-        return new Promise(function (resolve) {
-            rl.on('line', function (line) {
+        return new Promise(resolve => {
+            rl.on('line', (line) => {
                 let testedLine = line;
                 if (line.toLowerCase().startsWith('the ') && !isFirst) {
                     testedLine = line.slice(4)
@@ -24,7 +24,7 @@ module.exports = {
                     isFirst = false;
                 }
             });
-            rl.on('close', function () {
+            rl.on('close', () => {
                 resolve(themesNameToImg)
             });
         })

@@ -8,12 +8,9 @@ module.exports = {
         this.sendMsgToSlack(responseUrl, slackMessages.getFinalMsg(themeName)
         )
     },
-    sendSuggestionMsg: function (responseUrl, letter, filePath) {
-        parser.getThemeNamesToImgFromFile(letter, filePath)
-            .then(choices => {
-                this.themeNameToImgDict = choices;
-                return this.sendMsgToSlack(responseUrl, slackMessages.getChoiceMsg(choices, parser.theme, letter));
-            });
+    sendSuggestionMsg: async function (responseUrl, letter, filePath) {
+        this.themeNameToImgDict = await parser.getThemeNamesToImgFromFile(letter, filePath);
+        return this.sendMsgToSlack(responseUrl, slackMessages.getChoiceMsg(this.themeNameToImgDict, parser.theme, letter));
     },
     sendMsgToSlack: function (responseUrl, msg) {
         return axios.post(responseUrl, msg)

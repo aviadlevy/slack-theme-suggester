@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const slackBot = require('./slackBot');
 const app = express();
 
-app.listen(process.env.PORT, function () {
+app.listen(process.env.PORT, () => {
     if (process.argv[2] === undefined) {
         console.log('please specify path to csv file');
         process.exit()
@@ -15,7 +15,7 @@ app.listen(process.env.PORT, function () {
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.post('/choice', function (req) {
+app.post('/choice', req => {
     let resBody = JSON.parse(req.body.payload);
     if (resBody.callback_id.startsWith('postChoice')) {
         if (resBody.actions[0].name.toLowerCase() === 'yes') {
@@ -30,7 +30,7 @@ app.post('/choice', function (req) {
     }
 });
 
-app.post('/suggest', function (req, res) {
+app.post('/suggest', (req, res) => {
     const {token, text, response_url} = req.body;
     if (token === process.env.VEREFICATION_TOKEN) {
         let letter = text;

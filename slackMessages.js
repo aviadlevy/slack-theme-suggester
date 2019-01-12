@@ -52,37 +52,31 @@ function getYesNoActions(themeName) {
 
 module.exports =
     {
-        getChoiceMsg: function (choices, ChooseFrom, letter) {
-            return {
-                'text': `What ${ChooseFrom} do you choose?`,
-                'attachments':
-                    getAttachmentWithLimitActionLength(ChooseFrom, Object.keys(choices), letter)
+        getChoiceMsg: (choices, ChooseFrom, letter) => ({
+            'text': `What ${ChooseFrom} do you choose?`,
+            'attachments':
+                getAttachmentWithLimitActionLength(ChooseFrom, Object.keys(choices), letter)
 
-            };
-        },
-        getIsThisYourPickMsg: function (themeDict, themeName, letter) {
-            return {
-                'text': 'Do you happy with your pick?',
-                'attachments': [
-                    {
-                        'title': `${themeName}`,
-                        'fallback': 'Shame... buttons aren\'t supported in this land',
-                        'callback_id': `postChoice_${letter}`,
-                        'image_url': themeDict[themeName],
-                        'actions': getYesNoActions(themeName)
-                    }
-                ]
-            };
-        },
-        getFinalMsg: function (themeName) {
-            return {
-                'text': '',
-                attachments: [
-                    {
-                        'color': 'good',
-                        title: 'You picked ' + themeName.replace('&amp;', '&') + '. Great!'
-                    }
-                ]
-            };
-        }
+        }),
+        getIsThisYourPickMsg: (themeDict, themeName, letter) => ({
+            'text': 'Do you happy with your pick?',
+            'attachments': [
+                {
+                    'title': `${themeName}`,
+                    'fallback': 'Shame... buttons aren\'t supported in this land',
+                    'callback_id': `postChoice_${letter}`,
+                    'image_url': themeDict[themeName],
+                    'actions': getYesNoActions(themeName)
+                }
+            ]
+        }),
+        getFinalMsg: themeName => ({
+            'text': '',
+            attachments: [
+                {
+                    'color': 'good',
+                    title: 'You picked ' + themeName.replace('&amp;', '&') + '. Great!'
+                }
+            ]
+        })
     };
