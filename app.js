@@ -3,12 +3,16 @@ const bodyParser = require('body-parser');
 const slackBot = require('./slackBot');
 const app = express();
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.STS_PORT, () => {
     if (process.argv[2] === undefined) {
         console.log('please specify path to csv file');
         process.exit()
     }
-    console.log('server is up with port: ' + process.env.PORT);
+	if (process.env.STS_PORT === undefined) {
+		console.log('please set env variable - STS_PORT=<the_port_for_this_app>');
+        process.exit()
+	}
+    console.log('server is up with port: ' + process.env.STS_PORT);
 });
 
 
