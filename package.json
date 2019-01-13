@@ -9,7 +9,7 @@
   },
   "main": "app.js",
   "scripts": {
-    "start": "node --inspect app.js -- bands_enriched.csv"
+    "start": "node app.js -- bands_enriched.csv"
   },
   "dependencies": {
     "axios": "^0.18.0",
