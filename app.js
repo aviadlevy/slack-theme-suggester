@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const slackBot = require('./slackBot');
 const app = express();
 
-app.listen(process.env.STS_PORT, () => {
+app.listen(process.env.PORT || 80, () => {
     if (process.argv[2] === undefined) {
         console.log('please specify path to csv file');
         process.exit()
