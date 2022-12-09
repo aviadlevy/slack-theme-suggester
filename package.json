@@ -14,7 +14,7 @@
   "dependencies": {
     "axios": "^0.21.2",
     "body-parser": "latest",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "request": "^2.88.0"
   }
 }
